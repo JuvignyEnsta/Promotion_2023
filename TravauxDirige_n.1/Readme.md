@@ -1,14 +1,14 @@
-# Initiation à MPI
+# Initiation à MPI
 
 Ce TP permet une initiation aux commandes de base de MPI.
 
-Rappels essentiels :
--------------------
+## Rappels essentiels :
+
    1. Pour lancer une exécution parallèle avec MPI :
 
-        mpiexec -np xx ./nom_executable
+          mpiexec -np nbproc ./nom_executable
 
-      où xx est le nombre de processus qui lanceront simultanément l'exécutable.
+      où nbproc est le nombre de processus qui lanceront simultanément l'exécutable.
 
    2. Utiliser le Makefile fourni avec le TP, cela vous évitera (principalement pour ceux utilisant MSYS 2) une fastidieuse ligne de commande.
  
