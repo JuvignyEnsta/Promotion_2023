@@ -22,7 +22,7 @@ coller ici le résultats de lscpu.
 
 *Expliquer les paramètres, les fichiers, l'optimisation de compil, NbSamples, ...*
 
-OMP_NUM    | samples=1024 | 
+OMP_NUM    | samples=1024 | x
 -----------|--------------|----------
 séquentiel |   | 
 1          |   | 
