@@ -23,7 +23,7 @@ clean:
 %.exe: %.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $^ $(LIB)
 
-TestProductMatrix.exe : TestProductMatrix.cpp Matrix.hpp Matrix.cpp ProdMatMat.cpp
+TestProductMatrix.exe : TestProductMatrix.cpp Matrix.cpp ProdMatMat.cpp
 	$(CXX) $(CXXFLAGS2) $^ -o $@ $(LIB)	
 
 bitonic.exe : bitonic.cpp Vecteur.hpp Vecteur.cpp
