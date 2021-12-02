@@ -56,7 +56,7 @@
 
 \subsection{Introduction}
 
-La bibliothèque TBB (Threading Building Block library) est une biblithèque C++ qui remplit deux rôles :
+La bibliothèque TBB (Threading Building Block library) est une bibliothèque C++ qui remplit deux rôles~:
 \begin{enumerate}
     \item Remplit des fonctionnalités manquantes au support pour le parallélisme dans le standard C++, là où le langage n'a pas
           suffisamment évolué ou bien où les nouvelles caractéristiques du C++ ne sont pas encore bien supportées par les
@@ -68,24 +68,24 @@ La bibliothèque TBB (Threading Building Block library) est une biblithèque C++
 TBB contient un certain nombre de caractéristiques qu'on peut catégoriser en deux grands groupes :
 \begin{itemize}
     \item Des interfaces pour exprimer des algorithmes parallèles;
-    \item Des interfaces qui sont indépendant du modèle d'exécution
+    \item Des interfaces qui sont indépendantes du modèle d'exécution
 \end{itemize}
 
 Dans la première catégorie, on trouve :
 \begin{itemize}
     \item Des algorithmes parallèles génériques tels que la parallélisation de boucle, les réductions, etc.
     \item Des algorithmes de parallélisation par tâche (on définit un graphe de tâches qui seront exécutés en parallèle si possible par TBB)
-    \item Une version parallèle de la STL comme proposé par la norme C++17/C++20
+    \item Une version parallèle de la STL comme proposé par la norme C++17/C++20.
 \end{itemize}
 
 Dans la seconde catégorie, on trouve :
 \begin{itemize}
     \item Des conteneurs supportant la concurrence en multithreading (Tables de hashage, queues, tableaux dynamiques)
-    \item Des allocateurs parallélisables ou bien qui peuvent s'aligner avec les lignes de cache,etc.
+    \item Des allocateurs parallélisables ou bien qui peuvent s'aligner avec les lignes de cache, etc.
     \item Des primitives de synchronisation, etc.
 \end{itemize}
 
-Nous nous intéresserons ici surtout à l'utilisation des algorithmes parallèles génériques, et en particulier à la parallélisation de boucle
+Nous nous intéresserons ici surtout à l'utilisation des algorithmes parallèles génériques, et en particulier à la parallélisation de boucle.
 
 \subsection{Installation de TBB}
 
@@ -95,7 +95,7 @@ Nous nous intéresserons ici surtout à l'utilisation des algorithmes parallèle
 \item Sous Mac-OS X (avec homebrew) : \texttt{brew install tbb}
 \end{itemize}
 
-Allez dans le répertoire \texttt{TBBExamples} et essayer de compiler les exemples
+Allez dans le répertoire \texttt{TBBExamples} et essayez de compiler les exemples
 (en utilisant \texttt{make}).
 
 \subsection{Parallélisme de boucle}
@@ -103,7 +103,7 @@ Allez dans le répertoire \texttt{TBBExamples} et essayer de compiler les exempl
 La parallélisation d'une boucle se fait à l'aide de la fonction \texttt{tbb::parallel\_for} qui se décline en plusieurs
 versions :
 \begin{itemize}
-    \item Une version simple : \texttt{tbb::parallel\_for(start,end, step, lambda\_function)}. Par exemple :
+    \item Une version simple : \texttt{tbb::parallel\_for(start, end, step, lambda\_function)}. Par exemple :
     \begin{lstlisting}
         void print_hello( int i ) { std::cout << i << " : Hello world !" << std::endl; }
         
@@ -111,23 +111,23 @@ versions :
         {   ...
             tbb::parallel_for(0, 100, 2, [](int i) { print_hello(i); });        
     \end{lstlisting}
-    \item Une version utilisant des blocs en 1D, 2D ou 3D(voir plus loin)
-    \item On peut également rajouter un paritioneur qui définira la stratégie de
+    \item Une version utilisant des blocs en 1D, 2D ou 3D (voir plus loin).
+    \item On peut également rajouter un partitioneur qui définira la stratégie de
           distribution des blocs et de leur répartion. Par défaut, le découpage essaye 
-          d'être "intelligent" et la distribution des blocs est dynamique.
+          d'être ``intelligent'' et la distribution des blocs est dynamique.
 \end{itemize}
 
 \subsubsection{Les blocs d'indices}
 
 TBB propose des classes permettant de répartir les indices dans plusieurs tâches.
 Il existe de base trois classes permettant de répartir en 1D, 2D ou 3D des données 
-( la dimension correspond au nombre de boucles imbriquées). Il existe également
+(la dimension correspond au nombre de boucles imbriquées). Il existe également
 une classe générique permettant de gérer des dimensions supérieures.
 
 Pour chaque indice géré par la classe, il faudra donner à sa construction
 les indices de début et de fin de la boucle correspondante et,
 en option, une taille de grain. L'utilisation de cette taille de grain 
-diffère selon le partitioneur employé (on verra cela dans la section suivante).
+diffère selon le partitionneur employé (on verra cela dans la section suivante).
 
 La syntaxe pour les trois classes de base (templatées) est la suivante :
 \begin{itemize}
@@ -150,7 +150,7 @@ for (int i = r.begin(); i != r.end(); ++i )
     \end{lstlisting}
     On accède aux premiers indices à l'aide de la méthode \texttt{rows}
     et aux seconds indices à l'aide de la méthode \texttt{cols}.\\
-    Exemple d'utilisation (voir \texttt{Mandelbrot\_tbb.cpp} pour un exemple concrèt ) :
+    Exemple d'utilisation (voir \texttt{Mandelbrot\_tbb.cpp} pour un exemple concret) :
     \begin{lstlisting}
 auto r = tbb::blocked_range2d<int,unsigned>(-10,10,1,0, 40, 2);
 for (auto i = r.rows().begin(); i != r.rows().end(); ++i)
@@ -183,10 +183,10 @@ for (auto i = r.pages().begin(); i != r.pages().end(); ++i )
 \subsubsection{Les partitioneurs}
 
 Un partitioneur permet de spécifier comment un algorithme
-devra partionner sa boucle. La table suivante résume les 
+devra partitionner sa boucle. La table suivante résume les 
 caractéristiques des différents partitioneurs (le grain correspond au 
-nombre d'itération  que doit faire une boucle après avoir effectuer 
-une partition de la boucle originale ):
+nombre d'itération  que doit faire une boucle après avoir effectué
+une partition de la boucle originale) :
 \newcolumntype{M}[1]{>{\raggedright}m{#1}}
 
 \begin{tabular}{|c|M{6cm}|M{4cm}|} \hline
@@ -195,7 +195,7 @@ une partition de la boucle originale ):
 \texttt{auto\_partitioner} & Calcul automatiquement la taille du grain & $\frac{g}{2} \leq \mbox{taille}$ \tabularnewline \hline
 \texttt{static\_partitioner} & Détermine une taille de boucle fixe et une
 distribution uniforme des itérations sans faire d'équilibrage des charges. La distribution 
-uniforme est créé sauf si la taille du grain empêche de créer $P$ parties &
+uniforme est créée sauf si la taille du grain empêche de créer $P$ parties &
 $\max(\frac{g}{3}, \frac{N}{P}) \leq \mbox{taille}$ où
 \begin{itemize}
     \item $N$ est la taille du problème
@@ -214,19 +214,19 @@ parallèle, allez regarder dans les exemples le code \texttt{Mandelbrot\_tbb.cpp
 Dans un premier temps, nous allons modifier l'exercice fait au deuxième TD sur Mandelbrot.
 
 \begin{enumerate}
-    \item Faites en sorte que désormais, une tâche correspond au calcul de $nt$ lignes
+    \item Faites en sorte que désormais, une tâche MPI corresponde au calcul de $nt$ lignes
 (et non d'une seule ligne).
-    \item Paralléliser à l'aide d'OpenMP le calcul dans une tâche des $nt$ lignes à l'aide de 
-    $nt$ threads (on rajoutera la clause \texttt{num_threads}(nt) dans le \texttt{\#pragma omp})
+    \item Parallélisez à l'aide d'OpenMP le calcul dans une tâche des $nt$ lignes à l'aide de 
+    $nt$ threads (on rajoutera la clause \texttt{num\_threads}(nt) dans le \texttt{\#pragma omp})
     \item Regardez les différentes accélérations obtenues en fonction du nombre de processus MPI et 
-    du paramètre $nt$ et regarder quel est le meilleur temps que vous obtenez.
+    du paramètre $nt$ et regardez quel est le meilleur temps que vous obtenez.
     \item Comparez les temps de calcul obtenus pour deux processus (un maître et un esclave)
           avec les temps obtenus avec TBB pour $nt$ threads (en modifiant l'exemple : lignes à décommenter et modifier)
-\end{itemize}
+\end{enumerate}
 
 \subsection{Parallélisation avec TBB}
 
-Paralléliser à l'aide de TBB le code de raytracing fourni avec le TP.
-Essayer divers partitioneurs et tailles de grain et montrez à l'aide des 
+Parallélisez à l'aide de TBB le code de raytracing fourni avec le TP.
+Essayez divers partitioneurs et tailles de grain et montrez à l'aide des 
 temps mesurés que par défaut, TBB fait bien de l'équilibrage de charge dynamique.
 \end{document}
