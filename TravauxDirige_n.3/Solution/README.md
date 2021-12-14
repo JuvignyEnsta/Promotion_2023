@@ -45,7 +45,7 @@ Bien penser à mettre la réduction sur la variable `scal` (sinon résultat faux
 Temps (wall-clock) pour le programme (N=1023, nbSamples=100000) ; 
 
 SMP    | -O3
--------+---------
+-------|---------
 origin | 0.205195
 1      | 0.217259
 2      | 0.220752
@@ -83,7 +83,7 @@ Dans les tableaux ci-dessous, on a noté la meilleure valeur des 10 runs.
 `make TestProduct.exe && ./TestProduct.exe 1024`
 
   ordre           | time    | MFlops  | MFlops(n=2048) | MFlops(n=512)  | MFlops(n=4096)
-------------------+---------+---------+----------------+----------------+---------------
+------------------|---------|---------|----------------|----------------|---------------
 i,j,k (origine)   | 2.73764 | 782.476 |                |                | 
 j,i,k             | 3.72883 | 575.913 |                |                |
 i,k,j             | 12.0426 | 172.571 |                |                |
@@ -106,7 +106,7 @@ On décide donc de paralléliser la boucle jki par OpenMP :
 `make TestProduct_opt.exe && OMP_NUM_THREADS=8 ./TestProduct_opt.exe 1024`
 
   OMP_NUM | MFlops(n=1024) | MFlops(n=2048) |  MFlops(n=4096)
-----------+----------------+----------------+---------------
+----------|----------------|----------------|---------------
 1         |   4840.25      |     2912.19    |  2777.49
 2         |   9448.28      |
 3         |   13823.4      |
@@ -144,14 +144,14 @@ Pour le moment, on désactive les threads avec `OMP_NUM_THREADS=1` ;
 et on regarde l'influence de la taille de blocs :
 
   szBlock         | MFlops  | MFlops(n=2048) | MFlops(n=4096)
-------------------+---------+----------------+---------------
-origine (=max)    | 4761.65 |
-32                | 4256.9  |
-64                | 5009.49 |
-128               | 5736.18 |
-256               | 6593.25 |
+------------------|---------|----------------|---------------
+origine (=max)    | 4761.65 |                |
+32                | 4256.9  |                |
+64                | 5009.49 |                |
+128               | 5736.18 |                |
+256               | 6593.25 |                |
 512               | 6742.56 |   6810.54      |  6672.42
-1024              | 4758.02 |
+1024              | 4758.02 |                |
 
 Avec le produit par blocs, on retrouve la meilleure performance du séquentiel (>6700 MFlops). 
 Pour mon ordinateur, la meilleure taille de bloc semble être 512.
@@ -202,7 +202,7 @@ Et on recense les performances :
 `OMP_NUM_THREADS=1 ./TestProduct_blockomp.exe 4096`
 
  OMP_NUM | MFlops(n=1024) | MFlops(n=4096)
----------+----------------+---------------
+---------|----------------|---------------
  1       | 5258.89        | 5024.08
  2       | 10218.1        | 9883.77
  3       | 10235.4        | 13353.1
@@ -250,7 +250,7 @@ Noter que comme ce programme utilise un gérénateur aléatoire, les versions s�
 Côté performances :
 
 OMP_NUM_THREADS       | séq    | 1      | 2      | 4      | 8
-----------------------+--------+--------+--------+--------+-------
+----------------------|--------|--------|--------|--------|-------
 Temps calcul Bhudda 1 | 4.245  | 4.680  | 2.955  | 1.914  | 1.219
 Temps calcul Bhudda 2 | 4.446  | 4.626  | 2.631  | 1.395  | 0.781
 Temps calcul Bhudda 3 | 0.272  | 0.280  | 0.161  | 0.085  | 0.048
