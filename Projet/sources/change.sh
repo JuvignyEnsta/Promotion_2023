@@ -2,6 +2,7 @@
 
 
 find . -name '*pp' -exec sed -i \
+     -e 's/ê/e/g' \
      -e 's/é/e/g' \
      -e 's/è/e/g' \
      -e 's/à/a/g' \

@@ -88,9 +88,9 @@ namespace sdl2
             dictionary dico_font;
         };
 
-        // Affiche en prenant la totalite de la fenêtre
-        formated_text(const window& fenêtre, const std::string& path_for_font);
-        // Affiche en prenant une sous-zone de la fenêtre
+        // Affiche en prenant la totalite de la fenetre
+        formated_text(const window& fenetre, const std::string& path_for_font);
+        // Affiche en prenant une sous-zone de la fenetre
         formated_text(const std::array<std::int32_t,4>& zone, const std::string& path_for_font);
 
         format& get_format(style kind) { return this->formats[kind]; }
@@ -120,7 +120,7 @@ namespace sdl2
         std::vector<std::vector<std::string>> splitted_string;
         // La premiere ligne prise en compte lors de la l'affichage
         std::int32_t begin_line;
-        // La zone ou doit être affiche le texte (coord + longueur/hauteur)
+        // La zone ou doit etre affiche le texte (coord + longueur/hauteur)
         std::array<std::int32_t, 4> zone;
         std::array<format, end_style> formats;
         std::array<ordered_list_format, max_list_level> ordered_list_formats;

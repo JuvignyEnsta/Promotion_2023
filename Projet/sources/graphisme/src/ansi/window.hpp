@@ -3,7 +3,7 @@
 #include <array>
 #include "ioconsole.hpp"
 
-/** Cree une fenêtre sur une console. La fenêtre sera geree comme un flot de donnees */
+/** Cree une fenetre sur une console. La fenetre sera geree comme un flot de donnees */
 class window
 {
 public:

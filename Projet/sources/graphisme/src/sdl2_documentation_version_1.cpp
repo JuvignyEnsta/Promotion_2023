@@ -19,21 +19,21 @@ std::vector<std::string> load_md_document(const std::string& path)
     return output;
 }
 
-void afficher_titre(sdl2::window& fenêtre, const std::string_view& titre)
+void afficher_titre(sdl2::window& fenetre, const std::string_view& titre)
 {
-    auto [w,h] = fenêtre.dimensions();
+    auto [w,h] = fenetre.dimensions();
     std::uint16_t maxx = std::uint16_t(w)-1;
     sdl2::font fonte_titre("./data/Lato-Heavy.ttf", 38);
-    sdl2::texte banniere (titre.data(), fonte_titre, fenêtre, 
+    sdl2::texte banniere (titre.data(), fonte_titre, fenetre, 
                           w, 64, {0xFF,0xFF,0x00,0xFF}, {0x00,0x00,0xFF,0xFF},
                           sdl2::texte::middle_justify, 0, 11);
-    fenêtre << banniere.at(0,0) << sdl2::line({0,64}, {maxx,64}, {0x00,0x00,0xA0,0xFF})
+    fenetre << banniere.at(0,0) << sdl2::line({0,64}, {maxx,64}, {0x00,0x00,0xA0,0xFF})
             << sdl2::line({maxx,64}, {maxx,0}, {0,0,0,255})
             << sdl2::line({0,0}, {maxx,0}, {0,0xA0,0xFF,0xFF})
             << sdl2::line({0,0}, {0,64}, {0,0xA0,0xFF,0xFF});
 }
 
-void affiche_document(sdl2::window& fenêtre, 
+void affiche_document(sdl2::window& fenetre, 
                       const std::vector<std::string>& doc, int premiere_ligne = 0)
 {
     sdl2::font fonte_sec1("./data/Lato-Bold.ttf", 24);
@@ -42,7 +42,7 @@ void affiche_document(sdl2::window& fenêtre,
     sdl2::font fonte_texte("./data/Lato-Regular.ttf", 16);
     int posy = 70;
     std::size_t index = premiere_ligne;
-    auto [w,h] = fenêtre.dimensions();
+    auto [w,h] = fenetre.dimensions();
     while ( (posy < h) && (index < doc.size()) )
     {
         sdl2::font* pt_fonte = &fonte_texte;
@@ -70,21 +70,21 @@ void affiche_document(sdl2::window& fenêtre,
             marge = 14;
             encre = {0xFF,0x00,0x00,0xFF};
         }
-        sdl2::texte texte(sub_string.data(), *pt_fonte, fenêtre, w, encre,
+        sdl2::texte texte(sub_string.data(), *pt_fonte, fenetre, w, encre,
                           {0x00,0x00,0x00,0x00}, sdl2::texte::left_justify, 0);
-        fenêtre << texte.at(marge, posy);
+        fenetre << texte.at(marge, posy);
         posy += texte.dimension()[1] + 5;
         index += 1;
     }
 }
 
-void lecture_document(sdl2::window& fenêtre, const std::vector<std::string>& doc)
+void lecture_document(sdl2::window& fenetre, const std::vector<std::string>& doc)
 {
     std::size_t num_ligne = 1;
     std::string_view titre_view(doc[0].data()+2);
-    afficher_titre(fenêtre, titre_view);
+    afficher_titre(fenetre, titre_view);
 
-    affiche_document(fenêtre, doc, num_ligne);
+    affiche_document(fenetre, doc, num_ligne);
     bool quitting = false;
     sdl2::event_queue queue;
     while (not quitting)
@@ -100,16 +100,16 @@ void lecture_document(sdl2::window& fenêtre, const std::vector<std::string>& do
                 if (key_ev.code() == sdl2::event_keyboard::down)
                 {
                     num_ligne = std::min(num_ligne+1, doc.size()-1);
-                    fenêtre.cls({0,0,0,0xFF});
-                    afficher_titre(fenêtre, titre_view);
-                    affiche_document(fenêtre, doc, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    afficher_titre(fenetre, titre_view);
+                    affiche_document(fenetre, doc, num_ligne);
                 }
                 if (key_ev.code() == sdl2::event_keyboard::up)
                 {
                     num_ligne = std::max(num_ligne-1, 1ULL);
-                    fenêtre.cls({0,0,0,0xFF});
-                    afficher_titre(fenêtre, titre_view);
-                    affiche_document(fenêtre, doc, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    afficher_titre(fenetre, titre_view);
+                    affiche_document(fenetre, doc, num_ligne);
                 }
                 if (key_ev.ascci_code() == 'q')
                 {
@@ -117,7 +117,7 @@ void lecture_document(sdl2::window& fenêtre, const std::vector<std::string>& do
                 }
             }
         }
-        fenêtre << sdl2::flush;
+        fenetre << sdl2::flush;
     }
 }
 

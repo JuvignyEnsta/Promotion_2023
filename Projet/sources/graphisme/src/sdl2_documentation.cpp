@@ -7,16 +7,16 @@
 #include "SDL2/formated_text.hpp"
 
 
-void lecture_document(sdl2::window& fenêtre, const std::string& fich_doc)
+void lecture_document(sdl2::window& fenetre, const std::string& fich_doc)
 {
 #   if defined(DEBUG)
     std::cout << __PRETTY_FUNCTION__ << std::endl << std::flush;
 #   endif
     std::size_t num_ligne = 0;
-    sdl2::formated_text fmt_text(fenêtre, "./data");
+    sdl2::formated_text fmt_text(fenetre, "./data");
 
     fmt_text.load_simplified_markdown(fich_doc);
-    fmt_text.begin_at_line(fenêtre, num_ligne);
+    fmt_text.begin_at_line(fenetre, num_ligne);
 
     bool quitting = false;
     sdl2::event_queue queue;
@@ -51,13 +51,13 @@ void lecture_document(sdl2::window& fenêtre, const std::string& fich_doc)
                         break;
                     case sdl2::event_keyboard::home:
                         num_ligne = 0;
-                        fenêtre.cls({0,0,0,0xFF});
-                        fmt_text.begin_at_line(fenêtre, num_ligne);                    
+                        fenetre.cls({0,0,0,0xFF});
+                        fmt_text.begin_at_line(fenetre, num_ligne);                    
                         break;
                     case sdl2::event_keyboard::end:
                         num_ligne = std::max(fmt_text.nb_lines()-25,std::size_t(0));
-                        fenêtre.cls({0,0,0,0xFF});
-                        fmt_text.begin_at_line(fenêtre, num_ligne);                    
+                        fenetre.cls({0,0,0,0xFF});
+                        fmt_text.begin_at_line(fenetre, num_ligne);                    
                         break;
                     default:
                         if (key_ev.ascci_code() == 'q')
@@ -73,23 +73,23 @@ void lecture_document(sdl2::window& fenêtre, const std::string& fich_doc)
                 {
                 case sdl2::event_keyboard::down:
                     num_ligne = std::min(num_ligne+1, fmt_text.nb_lines()-1);
-                    fenêtre.cls({0,0,0,0xFF});
-                    fmt_text.begin_at_line(fenêtre, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    fmt_text.begin_at_line(fenetre, num_ligne);
                     break;
                 case sdl2::event_keyboard::up:
                     num_ligne = std::max(num_ligne, std::size_t(1))-1;
-                    fenêtre.cls({0,0,0,0xFF});
-                    fmt_text.begin_at_line(fenêtre, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    fmt_text.begin_at_line(fenetre, num_ligne);
                     break;
                 case sdl2::event_keyboard::pageup:
                     num_ligne = std::max(num_ligne, std::size_t(25))-25;
-                    fenêtre.cls({0,0,0,0xFF});
-                    fmt_text.begin_at_line(fenêtre, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    fmt_text.begin_at_line(fenetre, num_ligne);
                     break;
                 case sdl2::event_keyboard::pagedown:
                     num_ligne = std::min(num_ligne+25, fmt_text.nb_lines()-1);
-                    fenêtre.cls({0,0,0,0xFF});
-                    fmt_text.begin_at_line(fenêtre, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    fmt_text.begin_at_line(fenetre, num_ligne);
                     break;
                 }
             }
@@ -120,15 +120,15 @@ void lecture_document(sdl2::window& fenêtre, const std::string& fich_doc)
                     {
                         std::size_t delta_ligne = std::size_t(50*dy);
                         num_ligne = std::max(num_ligne, delta_ligne)-delta_ligne;
-                        fenêtre.cls({0,0,0,0xFF});
-                        fmt_text.begin_at_line(fenêtre, num_ligne);
+                        fenetre.cls({0,0,0,0xFF});
+                        fmt_text.begin_at_line(fenetre, num_ligne);
                     }
                     if (dy < 0)
                     {
                         std::size_t delta_ligne = std::size_t(-50*dy);
                         num_ligne = std::min(num_ligne + delta_ligne, fmt_text.nb_lines()-1);
-                        fenêtre.cls({0,0,0,0xFF});
-                        fmt_text.begin_at_line(fenêtre, num_ligne);                        
+                        fenetre.cls({0,0,0,0xFF});
+                        fmt_text.begin_at_line(fenetre, num_ligne);                        
                     }
                 }
             }
@@ -138,18 +138,18 @@ void lecture_document(sdl2::window& fenêtre, const std::string& fich_doc)
                 if (is_left_button)
                 {
                     num_ligne = std::min(num_ligne+5, fmt_text.nb_lines()-1);
-                    fenêtre.cls({0,0,0,0xFF});
-                    fmt_text.begin_at_line(fenêtre, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    fmt_text.begin_at_line(fenetre, num_ligne);
                 }
                 else
                 {
                     num_ligne = std::max(num_ligne, std::size_t(5))-5;
-                    fenêtre.cls({0,0,0,0xFF});
-                    fmt_text.begin_at_line(fenêtre, num_ligne);
+                    fenetre.cls({0,0,0,0xFF});
+                    fmt_text.begin_at_line(fenetre, num_ligne);
                 }    
             }
         }
-        fenêtre << fmt_text << sdl2::flush;
+        fenetre << fmt_text << sdl2::flush;
     }
 }
 

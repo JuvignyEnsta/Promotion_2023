@@ -13,7 +13,7 @@ sdl2::window::window(const std::string& titre, const std::array<int,2>& dimensio
 {
     SDL_DisplayMode dispMode;
     SDL_GetCurrentDisplayMode(0, &dispMode);
-    // Tentative de creation de la fenêtre :
+    // Tentative de creation de la fenetre :
     m_window = SDL_CreateWindow( titre.c_str(), position[0], position[1], 
                                  (dimensions[0] == -1 ? dispMode.w : dimensions[0]),
                                  (dimensions[1] == -1 ? dispMode.h : dimensions[1]), 
@@ -21,10 +21,10 @@ sdl2::window::window(const std::string& titre, const std::array<int,2>& dimensio
 
     if( m_window == nullptr )
     {
-        std::string error_mesg = "Echec de creation de fenêtre : " + std::string(SDL_GetError());
+        std::string error_mesg = "Echec de creation de fenetre : " + std::string(SDL_GetError());
         throw std::runtime_error(error_mesg);
     }
-    // Creation du moteur de rendu pour la fenêtre :
+    // Creation du moteur de rendu pour la fenetre :
     this->m_pt_renderer = SDL_CreateRenderer( this->m_window, -1, SDL_RENDERER_ACCELERATED );
     if( this->m_pt_renderer == nullptr )
     {
@@ -43,9 +43,9 @@ sdl2::window::~window()
 // ======================================================================================
 void sdl2::window::cls(const color &c)
 {
-    // Initialisation de la couleur pour remplir la fenêtre :
+    // Initialisation de la couleur pour remplir la fenetre :
     SDL_SetRenderDrawColor( this->m_pt_renderer, c.red, c.green, c.blue, c.alpha );
-    // On efface la fenêtre en la remplissant avec l'encre courante :
+    // On efface la fenetre en la remplissant avec l'encre courante :
     SDL_RenderClear(this->m_pt_renderer);
 }
 // ======================================================================================

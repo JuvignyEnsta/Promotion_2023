@@ -7,27 +7,27 @@ void creer_fenetre()
     // Pour choisir une fonte courante pour afficher du texte (pas encore mis en oeuvre pour l'affichage du texte)
     sdl2::font fonte_texte("./data/Lato-Thin.ttf", 18);
 
-    // Creer une fenêtre avec un titre et la resolution de la fenêtre (ici 800 x 600 pixels )
-    sdl2::window fenêtre("Nuclear Alert : Console principale", {800, 600});
+    // Creer une fenetre avec un titre et la resolution de la fenetre (ici 800 x 600 pixels )
+    sdl2::window fenetre("Nuclear Alert : Console principale", {800, 600});
 
     // Charge une image jpg (on peut aussi charger une image au format png)
-    sdl2::image homer("data/homer.jpg", fenêtre);
+    sdl2::image homer("data/homer.jpg", fenetre);
     homer.at(310,110);
     homer.stretch({128,128});
     homer.flip(sdl2::image::horizontal);
     homer.rotate({64,64}, 45);
     homer.color_filter({0xFF,0xF0,0xA0,0xFF});
 
-    sdl2::texte titre ("Console d'application elaboree", fonte_titre, fenêtre, {0x00,0xFF,0xFF,0xFF});
+    sdl2::texte titre ("Console d'application elaboree", fonte_titre, fenetre, {0x00,0xFF,0xFF,0xFF});
     titre.at(10,310);
     auto [wph, hph] = titre.dimension();
     titre.rotate({wph/2,hph/2}, 30);
 
-    sdl2::texte phrase("Taux de bore detecte : 30%", fonte_texte, fenêtre, {0xFF,0xFF,0xFF,0xFF});
+    sdl2::texte phrase("Taux de bore detecte : 30%", fonte_texte, fenetre, {0xFF,0xFF,0xFF,0xFF});
     phrase.at(10,360);
 
     sdl2::texte doc("Ceci est de la documentation tres poussee. On peut faire des sauts de ligne, etc.\n"
-                    "Comme on peut le voir ici !", fonte_texte, fenêtre, 320, 200, {0xFF,0xFF,0x00,0xFF},
+                    "Comme on peut le voir ici !", fonte_texte, fenetre, 320, 200, {0xFF,0xFF,0x00,0xFF},
                     {0x00,0x00,0xFF,0xFF});
     doc.at(400, 360);
     doc.rotate({160,100}, 5);
@@ -48,19 +48,19 @@ void creer_fenetre()
         // 
         // Donc 0xAB = 10*16 + 11 = 171 en decimal
         //      0xFF = 15*16 + 15 = 255 en decimal
-        fenêtre << sdl2::rectangle({100,100}, {100,50}, {0,0xFF,0xFF,0xFF}, true);
+        fenetre << sdl2::rectangle({100,100}, {100,50}, {0,0xFF,0xFF,0xFF}, true);
         // Affichage d'un segment de droite
-        fenêtre << sdl2::line({10,10}, {50,30}, {0xFF,0x00,0x00,0xFF});
+        fenetre << sdl2::line({10,10}, {50,30}, {0xFF,0x00,0x00,0xFF});
         // Affichage d'un polygone.
-        fenêtre << sdl2::polygon({ std::array{200,200}, {250,250}, {200,300}, {150,250} }, {0xFF,0xFF,0x00,0xFF})
+        fenetre << sdl2::polygon({ std::array{200,200}, {250,250}, {200,300}, {150,250} }, {0xFF,0xFF,0x00,0xFF})
                 << homer << titre << phrase << doc;
         if (posbuffer > 0)
         {
-            sdl2::texte name(buffername, fonte_texte, fenêtre, {0xFF,0xFF,0xFF,0xFF});
+            sdl2::texte name(buffername, fonte_texte, fenetre, {0xFF,0xFF,0xFF,0xFF});
             name.at(xinput,yinput);
-            fenêtre << name;
+            fenetre << name;
         }
-        fenêtre << sdl2::flush;
+        fenetre << sdl2::flush;
         auto events = queue.pull_events();
         for ( const auto& e : events)
         {
