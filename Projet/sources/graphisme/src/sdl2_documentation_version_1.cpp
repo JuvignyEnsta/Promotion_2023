@@ -24,24 +24,24 @@ void afficher_titre(sdl2::window& fenêtre, const std::string_view& titre)
     auto [w,h] = fenêtre.dimensions();
     std::uint16_t maxx = std::uint16_t(w)-1;
     sdl2::font fonte_titre("./data/Lato-Heavy.ttf", 38);
-    sdl2::texte bannière (titre.data(), fonte_titre, fenêtre, 
+    sdl2::texte banniere (titre.data(), fonte_titre, fenêtre, 
                           w, 64, {0xFF,0xFF,0x00,0xFF}, {0x00,0x00,0xFF,0xFF},
                           sdl2::texte::middle_justify, 0, 11);
-    fenêtre << bannière.at(0,0) << sdl2::line({0,64}, {maxx,64}, {0x00,0x00,0xA0,0xFF})
+    fenêtre << banniere.at(0,0) << sdl2::line({0,64}, {maxx,64}, {0x00,0x00,0xA0,0xFF})
             << sdl2::line({maxx,64}, {maxx,0}, {0,0,0,255})
             << sdl2::line({0,0}, {maxx,0}, {0,0xA0,0xFF,0xFF})
             << sdl2::line({0,0}, {0,64}, {0,0xA0,0xFF,0xFF});
 }
 
 void affiche_document(sdl2::window& fenêtre, 
-                      const std::vector<std::string>& doc, int première_ligne = 0)
+                      const std::vector<std::string>& doc, int premiere_ligne = 0)
 {
     sdl2::font fonte_sec1("./data/Lato-Bold.ttf", 24);
     sdl2::font fonte_sec2("./data/Lato-Bold.ttf", 20);
     sdl2::font fonte_sec3("./data/Lato-Bold.ttf", 18);
     sdl2::font fonte_texte("./data/Lato-Regular.ttf", 16);
     int posy = 70;
-    std::size_t index = première_ligne;
+    std::size_t index = premiere_ligne;
     auto [w,h] = fenêtre.dimensions();
     while ( (posy < h) && (index < doc.size()) )
     {
@@ -126,8 +126,8 @@ int main(int argc, char* args[])
     sdl2::init(argc, args);
     {
         auto doc = load_md_document("SDL2_documentation.md");
-        sdl2::window écran("Documentation de SDL2 ++", {1280,1024});
-        lecture_document(écran, doc);
+        sdl2::window ecran("Documentation de SDL2 ++", {1280,1024});
+        lecture_document(ecran, doc);
     }
     sdl2::finalize();
     return EXIT_SUCCESS;

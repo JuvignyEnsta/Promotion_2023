@@ -3,11 +3,11 @@
 #include <array>
 #include "ioconsole.hpp"
 
-/** Crée une fenêtre sur une console. La fenêtre sera gérée comme un flot de données */
+/** Cree une fenêtre sur une console. La fenêtre sera geree comme un flot de donnees */
 class window
 {
 public:
-    window( const std::array<int,2>& pos, const std::array<int,2>& dim, const char* couleur_arrière_plan,
+    window( const std::array<int,2>& pos, const std::array<int,2>& dim, const char* couleur_arriere_plan,
             const char* couleur_encre, const char* couleur_bordure );
 private:
     int posx, posy;

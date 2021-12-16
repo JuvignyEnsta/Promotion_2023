@@ -6,26 +6,26 @@
 #include "agent_pathogene.hpp"
 #include "position.hpp"
 
-namespace épidémie 
+namespace epidemie 
 {
 class Individu 
 {
 public:
-    enum class Sensibilité
+    enum class Sensibilite
     {
-        Sensible, Contagieux, Infecté, Immunisé
+        Sensible, Contagieux, Infecte, Immunise
     };
 
-    Individu( unsigned int graine_aléatoire, int espérance_de_vie, bool estNé = false, int déplacement_max = 10 );
+    Individu( unsigned int graine_aleatoire, int esperance_de_vie, bool estNe = false, int deplacement_max = 10 );
 
-    Sensibilité getEtatGrippal() const 
+    Sensibilite getEtatGrippal() const 
     {
-        return m_grippe.sensibilité;
+        return m_grippe.sensibilite;
     }
 
-    Sensibilité getEtatAgentPathogène() const 
+    Sensibilite getEtatAgentPathogene() const 
     {
-        return m_agent_pathogène.sensibilité;
+        return m_agent_pathogene.sensibilite;
     }
 
     bool aGrippeContagieuse() const 
@@ -33,59 +33,59 @@ public:
         return m_grippe.temps_contagieux > 0;
     }
 
-    bool aAgentPathogèneContagieux() const
+    bool aAgentPathogeneContagieux() const
     {
-        return m_agent_pathogène.temps_contagieux > 0;
+        return m_agent_pathogene.temps_contagieux > 0;
     }
 
     void veillirDUnJour();
 
     bool doitMourir() const 
     {
-        return m_âge >= m_espérance_de_vie;
+        return m_age >= m_esperance_de_vie;
     }
 
-    void seDéplace( Grille& grille );
+    void seDeplace( Grille& grille );
     void setPosition(int largeur, int hauteur); // Positonne un individu au hasard...
     Position const& position() const { return this->m_position; }
 
-    void devientImmuniséGrippe()
+    void devientImmuniseGrippe()
     {
-        m_grippe.sensibilité = Sensibilité::Immunisé;
+        m_grippe.sensibilite = Sensibilite::Immunise;
     }
 
     void redevientSensibleGrippe()
     {
-        m_grippe.sensibilité = Sensibilité::Sensible;
+        m_grippe.sensibilite = Sensibilite::Sensible;
     }
 
-    bool testContaminationGrippe( Grille const& grille, Interactions const& t_interactions, Grippe& grippe, AgentPathogène& agent);
-    bool testContaminationAgent( Grille const& grille, AgentPathogène& agent);
+    bool testContaminationGrippe( Grille const& grille, Interactions const& t_interactions, Grippe& grippe, AgentPathogene& agent);
+    bool testContaminationAgent( Grille const& grille, AgentPathogene& agent);
 
-    void estContaminé( Grippe& grippe );
-    void estContaminé( AgentPathogène& agent );
+    void estContamine( Grippe& grippe );
+    void estContamine( AgentPathogene& agent );
 
 
 
 private:
     struct {
-        Sensibilité sensibilité = Sensibilité::Sensible;
+        Sensibilite sensibilite = Sensibilite::Sensible;
         int temps_incubation = 0;
         int temps_symptomatique = 0;
         int temps_contagieux = 0;
     } m_grippe;
     struct {
-        Sensibilité sensibilité = Sensibilité::Sensible;
+        Sensibilite sensibilite = Sensibilite::Sensible;
         int temps_asymptomatique = 0, temps_symptomatique = 0;
-        int temps_passé_immunisé = 0, temps_contagieux    = 0;
-    } m_agent_pathogène;
-    int m_âge, m_espérance_de_vie;
+        int temps_passe_immunise = 0, temps_contagieux    = 0;
+    } m_agent_pathogene;
+    int m_age, m_esperance_de_vie;
     Position m_position;
     std::default_random_engine         m_moteur_stochastique;
-    std::uniform_int_distribution<int> m_générateur_quantité_déplacement;
-    std::uniform_int_distribution<int> m_générateur_déplacement;
-    std::uniform_real_distribution<double> m_générateur_maladie;
-    std::uniform_int_distribution<int> m_générateur_âge;
+    std::uniform_int_distribution<int> m_generateur_quantite_deplacement;
+    std::uniform_int_distribution<int> m_generateur_deplacement;
+    std::uniform_real_distribution<double> m_generateur_maladie;
+    std::uniform_int_distribution<int> m_generateur_age;
 };
 }
 

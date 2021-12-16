@@ -13,7 +13,7 @@ sdl2::window::window(const std::string& titre, const std::array<int,2>& dimensio
 {
     SDL_DisplayMode dispMode;
     SDL_GetCurrentDisplayMode(0, &dispMode);
-    // Tentative de création de la fenêtre :
+    // Tentative de creation de la fenêtre :
     m_window = SDL_CreateWindow( titre.c_str(), position[0], position[1], 
                                  (dimensions[0] == -1 ? dispMode.w : dimensions[0]),
                                  (dimensions[1] == -1 ? dispMode.h : dimensions[1]), 
@@ -21,17 +21,17 @@ sdl2::window::window(const std::string& titre, const std::array<int,2>& dimensio
 
     if( m_window == nullptr )
     {
-        std::string error_mesg = "Echec de création de fenêtre : " + std::string(SDL_GetError());
+        std::string error_mesg = "Echec de creation de fenêtre : " + std::string(SDL_GetError());
         throw std::runtime_error(error_mesg);
     }
-    // Création du moteur de rendu pour la fenêtre :
+    // Creation du moteur de rendu pour la fenêtre :
     this->m_pt_renderer = SDL_CreateRenderer( this->m_window, -1, SDL_RENDERER_ACCELERATED );
     if( this->m_pt_renderer == nullptr )
     {
-        std::string error_mesg = "Echec de création du moteur de rendu : " + std::string(SDL_GetError());
+        std::string error_mesg = "Echec de creation du moteur de rendu : " + std::string(SDL_GetError());
         throw std::runtime_error(error_mesg);
     }
-    // Initialisation de la couleur par défaut :
+    // Initialisation de la couleur par defaut :
     SDL_SetRenderDrawColor( this->m_pt_renderer, 0xFF, 0xFF, 0xFF, 0xFF );
 }
 // ======================================================================================

@@ -33,7 +33,7 @@ sdl2::image::image(const std::string &file, window& win, const color& transparen
     this->pt_texture = SDL_CreateTextureFromSurface( win.get_native_renderer(), loadedSurface );
     if( this->pt_texture == nullptr )
     {
-        std::string errmsg = "Incapable de créer une texture de " + file + " : "
+        std::string errmsg = "Incapable de creer une texture de " + file + " : "
                            + std::string(SDL_GetError());
         throw std::runtime_error(errmsg);
     }

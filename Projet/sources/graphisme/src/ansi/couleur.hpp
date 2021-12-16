@@ -28,7 +28,7 @@ namespace console
         static constexpr const char blanc_brillant[]  = "\u001b[37;1m";
         static constexpr const bool encre             = true;
         static constexpr const bool papier            = false;
-        /** Créer une couleur. Par défaut pour l'encre, mais si encre est faux,
+        /** Creer une couleur. Par defaut pour l'encre, mais si encre est faux,
             ce sera pour la couleur du papier.
         */
         couleur(const char* code_couleur, bool pour_encre = true)

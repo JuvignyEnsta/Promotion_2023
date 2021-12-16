@@ -124,10 +124,10 @@ namespace sdl2
         std::array<std::int32_t,2> position() const
         { return { this->_position_x, this->_position_y}; }
     private:
-        std::uint8_t _id_button; // Quel est le bouton de la souris concerné ?
-        std::uint8_t _state_of_button; // Etat du bouton (appuyé/relâché)
+        std::uint8_t _id_button; // Quel est le bouton de la souris concerne ?
+        std::uint8_t _state_of_button; // Etat du bouton (appuye/relache)
         std::uint8_t _number_of_clicks;// Nombre de cliques (double clique, triple clique, etc.)
-        std::int32_t _position_x, _position_y;// Position de la souris au moment de l'événement
+        std::int32_t _position_x, _position_y;// Position de la souris au moment de l'evenement
     };
     // =============================================================================================
     class event_keyboard : public event
@@ -201,7 +201,7 @@ namespace sdl2
     private:
         std::uint8_t _state;
         std::int32_t _code;
-        std::uint8_t _repeat; // Nombre de fois que la touche a été enfoncé rapidement
+        std::uint8_t _repeat; // Nombre de fois que la touche a ete enfonce rapidement
     };
     // ---------------------------------------------------------------------------------------------
     class event_touch : public event
@@ -239,9 +239,9 @@ namespace sdl2
         float pression() const { return this->pressure; }
 
     private:
-        float x,y; // Où se trouve le doigt (normalisé entre 0 et 1)
-        float dx, dy; // Mouvement relatif (normalisé entre -1 et 1)
-        float pressure; // La quantité de pression exercée par le doigt (entre 0 et 1)
+        float x,y; // Ou se trouve le doigt (normalise entre 0 et 1)
+        float dx, dy; // Mouvement relatif (normalise entre -1 et 1)
+        float pressure; // La quantite de pression exercee par le doigt (entre 0 et 1)
         std::int32_t type;
     };
     // =============================================================================================

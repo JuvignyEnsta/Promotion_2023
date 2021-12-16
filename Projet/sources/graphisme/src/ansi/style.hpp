@@ -14,7 +14,7 @@ namespace console
         static constexpr const char gras[]     = "\u001b[1m";
         static constexpr const char maigre[]   = "\u001b[2m";
         static constexpr const char italique[] = "\u001b[3m";
-        static constexpr const char souligné[] = "\u001b[4m";
+        static constexpr const char souligne[] = "\u001b[4m";
         static constexpr const char clignotement_lent[]   = "\u001b[5m";
         static constexpr const char clignotement_rapide[] = "\u001b[6m";
         static constexpr const char inverse[]  = "\u001b[7m";

@@ -50,7 +50,7 @@ namespace ncurses
             : local_palette(COLORS)
         {
             short r, g, b;
-            // On prend par défaut la palette courante de ncurses
+            // On prend par defaut la palette courante de ncurses
             for ( int i = 0; i < COLORS; ++i )
             {
                 color_content(i, &r, &g, &b);

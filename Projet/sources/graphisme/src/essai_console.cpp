@@ -15,7 +15,7 @@ int main(int nargs, char* argv[])
               << console::curseur({1,17}) //ligne, colonne 
               << console::style(console::style::double_taille, "ANSI ++")
               << console::curseur({3,12})
-              << console::style(console::style::double_largeur, "Bibliothèque C++")
+              << console::style(console::style::double_largeur, "Bibliotheque C++")
               << std::endl;
 
     console::restaure();
@@ -30,12 +30,12 @@ int main(int nargs, char* argv[])
     con.restaure();
 
     std::cout << console::curseur(30, 1) << console::style(console::gras) << "Texte en gras "
-              << console::style(console::normal) << console::style(console::souligné)
+              << console::style(console::normal) << console::style(console::souligne)
               << "Texte souligne " << console::style(console::normal) 
               << console::style(console::inverse) << "Texte inverse"
               << console::style(console::normal) << std::endl;
 
-    // Fonction lambda permettant d'attendre un certain temps (passé en argument)
+    // Fonction lambda permettant d'attendre un certain temps (passe en argument)
     auto sleep = [] (double dt) 
     {         
         auto deb = std::chrono::high_resolution_clock::now();
@@ -55,13 +55,13 @@ int main(int nargs, char* argv[])
         sleep(0.1);
     }
     std::cout << console::cls();
-    // Affiche maintenant quatre barres de progression. A chaque itération, une des quatre barres progresse
+    // Affiche maintenant quatre barres de progression. A chaque iteration, une des quatre barres progresse
     // On arrete lorsque les quatre barres sont pleines :
-    std::array barres{0.,0.,0.,0.};// Les quatres barres : valeurs allant de 0. à 1.
+    std::array barres{0.,0.,0.,0.};// Les quatres barres : valeurs allant de 0. a 1.
     std::random_device rd;
     std::uniform_int_distribution<int> distribution(0,3);// Tire au hasard un nombre entre 0 et 3 (compris, distribution uniforme)
     auto somme = std::accumulate(barres.begin(), barres.end(), 0.);
-    std::cout << console::curseur(console::caché) << console::style(console::invisible) <<  "Multi loading\n\n\n\n\n";
+    std::cout << console::curseur(console::cache) << console::style(console::invisible) <<  "Multi loading\n\n\n\n\n";
     while (somme < 4.)
     {        
         std::cout << console::curseur(console::haut,4) << console::curseur(console::gauche,1000);
@@ -88,7 +88,7 @@ int main(int nargs, char* argv[])
             std::cout << "]" << std::endl;
         }
         std::cout << std::flush;
-        // Incrémentation au hasard d'une des quatre barres de 0.01 (1%) :
+        // Incrementation au hasard d'une des quatre barres de 0.01 (1%) :
         int ind = distribution(rd);
         assert(ind>=0); assert(ind<barres.size());
         if (barres[ind] < 1.)

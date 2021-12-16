@@ -109,7 +109,7 @@ void lecture_document(sdl2::window& fenêtre, const std::string& fich_doc)
                 else if (mouse_ev.state() == sdl2::event_mouse_button::released)
                     mouse_button_pressed = false;
             }
-            // Gestion de l'écran tactil :
+            // Gestion de l'ecran tactil :
             if (e->kind_of_event() == sdl2::event::touch_finger)
             {
                 auto& touch_ev = dynamic_cast<sdl2::event_touch&>(*e);
@@ -160,9 +160,9 @@ int main(int argc, char* args[])
 #   endif
     sdl2::init(argc, args);
     {
-        sdl2::window écran("Documentation de SDL2 ++", {1280,1024});
+        sdl2::window ecran("Documentation de SDL2 ++", {1280,1024});
 
-        lecture_document(écran, "SDL2_documentation.md");
+        lecture_document(ecran, "SDL2_documentation.md");
     }
     sdl2::finalize();
     return EXIT_SUCCESS;

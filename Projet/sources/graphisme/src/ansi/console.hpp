@@ -9,7 +9,7 @@ namespace console
 
     void init();
 
-    /** Efface tout l'écran */
+    /** Efface tout l'ecran */
     void cls(couleur col);
 
     void restaure();

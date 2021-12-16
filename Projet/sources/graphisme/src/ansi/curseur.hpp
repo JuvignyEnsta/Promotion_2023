@@ -29,8 +29,8 @@ namespace console
             ansi_escape += std::to_string(nombre_pas) + direction;
         }
 
-        static constexpr const char sauve_état[] = "\u001b[s";
-        static constexpr const char restaure_état[] = "\u001b[u";
+        static constexpr const char sauve_etat[] = "\u001b[s";
+        static constexpr const char restaure_etat[] = "\u001b[u";
 
         curseur(const char* commande)
             : ansi_escape(commande)

@@ -3,7 +3,7 @@
 #include <array>
 #include "grille.hpp"
 
-namespace épidémie 
+namespace epidemie 
 {
 struct Position 
 {

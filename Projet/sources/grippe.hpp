@@ -2,52 +2,52 @@
 #define _EPIDEMIE_GRIPPE_HPP_
 #include <random>
 
-namespace épidémie 
+namespace epidemie 
 {
 class Grippe 
 {
 public:
-    Grippe(int graine_aléatoire)
-        :   m_moteur_stochastique(graine_aléatoire),
-            m_générateur_transmission(0.033, 0.033/30),
-            m_générateur_date_importation(71.*71./28., 28./71.),
-            m_générateur_incubation(40, 0.05),
-            m_générateur_symptomatique(16.,0.25)
+    Grippe(int graine_aleatoire)
+        :   m_moteur_stochastique(graine_aleatoire),
+            m_generateur_transmission(0.033, 0.033/30),
+            m_generateur_date_importation(71.*71./28., 28./71.),
+            m_generateur_incubation(40, 0.05),
+            m_generateur_symptomatique(16.,0.25)
     {
     }
 
     void calculNouveauTauxTransmission()
     {
-        m_taux_transmission = m_générateur_transmission(m_moteur_stochastique);
+        m_taux_transmission = m_generateur_transmission(m_moteur_stochastique);
     }
 
     double tauxTransmission() const { return m_taux_transmission; }
 
-    // Renvoit un nombre de jour après le premier Octobre
+    // Renvoit un nombre de jour apres le premier Octobre
     int  dateCalculImportationGrippe  ()
     {
-        return int(m_générateur_date_importation(m_moteur_stochastique));
+        return int(m_generateur_date_importation(m_moteur_stochastique));
     }
 
     int nombreJoursIncubation()
     {
-        return int(m_générateur_incubation(m_moteur_stochastique));
+        return int(m_generateur_incubation(m_moteur_stochastique));
     }
 
     int nombreJoursSymptomatique() 
     {
-        return int(m_générateur_symptomatique(m_moteur_stochastique));
+        return int(m_generateur_symptomatique(m_moteur_stochastique));
     }
 
 private:
     double m_taux_transmission = 0.033;
-    int    m_date_début_grippe = 1;
+    int    m_date_debut_grippe = 1;
 
     std::default_random_engine       m_moteur_stochastique;
-    std::normal_distribution<double> m_générateur_transmission;
-    std::gamma_distribution<double>  m_générateur_date_importation;
-    std::gamma_distribution<double>  m_générateur_incubation;
-    std::gamma_distribution<double>  m_générateur_symptomatique;
+    std::normal_distribution<double> m_generateur_transmission;
+    std::gamma_distribution<double>  m_generateur_date_importation;
+    std::gamma_distribution<double>  m_generateur_incubation;
+    std::gamma_distribution<double>  m_generateur_symptomatique;
 };
 }
 

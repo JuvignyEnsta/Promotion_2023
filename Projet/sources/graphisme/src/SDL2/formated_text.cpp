@@ -94,7 +94,7 @@ sdl2::formated_text::load_simplified_markdown( const std::string& path )
     std::ifstream fich(path.c_str());
     std::vector<std::string> lines;
 #   if defined(DEBUG)
-    std::cerr << "Fichier chargé : " << std::endl << std::flush;
+    std::cerr << "Fichier charge : " << std::endl << std::flush;
 #   endif
     while (fich)
     {
@@ -109,11 +109,11 @@ sdl2::formated_text::load_simplified_markdown( const std::string& path )
     }
     fich.close();
 #   if defined(DEBUG)
-    std::cerr << "Fin chargement ligne à ligne" << std::endl << std::flush;
+    std::cerr << "Fin chargement ligne a ligne" << std::endl << std::flush;
 #   endif
 
-    // On va adapter maintenant le texte à la zone dans laquelle on veut afficher et préparer les
-    // formats spéciaux (italic, bolc, etc.) dans splitted_string
+    // On va adapter maintenant le texte a la zone dans laquelle on veut afficher et preparer les
+    // formats speciaux (italic, bolc, etc.) dans splitted_string
     splitted_string.reserve(lines.size());
     style current_style = style::texte;
     int start_texte = 0;
@@ -190,15 +190,15 @@ sdl2::formated_text::load_simplified_markdown( const std::string& path )
 #   if defined(DEBUG)
             std::cerr << "C'est du texte..." << std::endl << std::flush;
 #   endif
-            // On doit décomposer en plusieur bouts selon le formatage voulu ou si c'est une liste :
+            // On doit decomposer en plusieur bouts selon le formatage voulu ou si c'est une liste :
             // est-ce une liste ?
             if (std::isdigit(line[0]) && (line[1] == '.'))
-                width = 32;// Alors on doit décaler de trente-deux pixels
+                width = 32;// Alors on doit decaler de trente-deux pixels
             else
                 width = 0 ;
             current_style = style::texte;
             std::istringstream iline(line);
-            // Si on est en mode texte, on décompose mot par mot le paragraphe (ou la liste) :
+            // Si on est en mode texte, on decompose mot par mot le paragraphe (ou la liste) :
             std::vector<std::string> words{std::istream_iterator<std::string>(iline),
                                            std::istream_iterator<std::string>()};
             std::vector<std::int32_t> position; position.reserve(words.size());
@@ -289,7 +289,7 @@ sdl2::formated_text::begin_at_line(window& w, int iline)
 #   endif
     int maxwidth  = this->zone[2];
     int maxheight = this->zone[3];
-    // Première étape, compter le nombre de lignes imposées (par des \n) et leur emplacement
+    // Premiere etape, compter le nombre de lignes imposees (par des \n) et leur emplacement
     SDL_Surface* panneau = SDL_CreateRGBSurface(SDL_SWSURFACE, maxwidth, maxheight, 32, 0, 0, 0, 0);
     SDL_FillRect(panneau, nullptr, SDL_MapRGB(panneau->format, 
                  this->formats[style::texte].papier.red, this->formats[style::texte].papier.green, 
@@ -317,7 +317,7 @@ sdl2::formated_text::begin_at_line(window& w, int iline)
                 pos.y += ht;
                 continue;
             }
-            // Il faut d'abord gérer si ce n'est pas par hasard des barres horizontales à afficher !
+            // Il faut d'abord gerer si ce n'est pas par hasard des barres horizontales a afficher !
             if (word == "****")
             {
 #   if defined(DEBUG)
@@ -415,7 +415,7 @@ sdl2::formated_text::begin_at_line(window& w, int iline)
             else if ( (word.size() > 2) && (std::string_view(word.data(), 2) == "# ") )
             {
 #               if defined(DEBUG)
-                std::cerr << "Préparation d'un titre" << std::endl << std::flush;
+                std::cerr << "Preparation d'un titre" << std::endl << std::flush;
 #               endif
                 current_style = style::heading_1;
                 beg_word = 2;
@@ -497,7 +497,7 @@ sdl2::formated_text::begin_at_line(window& w, int iline)
             SDL_BlitSurface(textSurface, NULL, panneau, &pos);
             pos.x += textSurface->w;
             SDL_FreeSurface(textSurface);
-            // Si on a des * en fin de chaine, il faut rétablir les styles :
+            // Si on a des * en fin de chaine, il faut retablir les styles :
             if (end_word < word.size())
             {
                 if (end_word == word.size()-3)
@@ -524,7 +524,7 @@ sdl2::formated_text::begin_at_line(window& w, int iline)
     this->pt_texture = SDL_CreateTextureFromSurface( w.get_native_renderer(), panneau );
     if (this->pt_texture == nullptr)
     {
-        std::string errMsg = "Incapable de créer une texture du texte rendu : " +
+        std::string errMsg = "Incapable de creer une texture du texte rendu : " +
                              std::string(SDL_GetError());
         throw std::runtime_error(errMsg);
     }

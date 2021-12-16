@@ -3,35 +3,35 @@
 #include <random>
 #include <utility>
 
-namespace épidémie 
+namespace epidemie 
 {
-class AgentPathogène 
+class AgentPathogene 
 {
 public:
-    AgentPathogène( unsigned int graine_aléatoire );
+    AgentPathogene( unsigned int graine_aleatoire );
 
 
     int nombreJoursAsymptomatique()
     {
-        return int(m_générateur_symptomatique(m_moteur_stochastique));
+        return int(m_generateur_symptomatique(m_moteur_stochastique));
     }
 
     int nombreJoursSymptomatique() 
     {
-        return int(m_générateur_symptomatique(m_moteur_stochastique));
+        return int(m_generateur_symptomatique(m_moteur_stochastique));
     }
 
-    /* Paramètres de l'agent pathogène avec valeurs par défaut */
+    /* Parametres de l'agent pathogene avec valeurs par defaut */
     double taux_infection;
-    double taux_cas_rapporté = 1.;
-    std::pair<int,int> période_contagieux = {0, 2}; // en jours : 1er chiffre apr_ès contagion, second chiffre : après symptomatique
-    int    nombre_jours_immunité = 0; // Si différent de zéro, individus développent une immunité pendant un certain nombre de jours
+    double taux_cas_rapporte = 1.;
+    std::pair<int,int> periode_contagieux = {0, 2}; // en jours : 1er chiffre apr_es contagion, second chiffre : apres symptomatique
+    int    nombre_jours_immunite = 0; // Si different de zero, individus developpent une immunite pendant un certain nombre de jours
 
-    double theta_BA          = 1.; // Paramètre d'interaction avec la grippe :    
+    double theta_BA          = 1.; // Parametre d'interaction avec la grippe :    
 private:
     std::default_random_engine      m_moteur_stochastique      ;
-    std::gamma_distribution<double> m_générateur_asymptomatique;
-    std::gamma_distribution<double> m_générateur_symptomatique ;
+    std::gamma_distribution<double> m_generateur_asymptomatique;
+    std::gamma_distribution<double> m_generateur_symptomatique ;
 };
 }
 #endif

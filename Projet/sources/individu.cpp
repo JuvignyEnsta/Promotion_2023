@@ -3,33 +3,33 @@
 #include <iostream>
 #include "individu.hpp"
 
-épidémie::Individu::Individu( unsigned int graine_aléatoire, int espérance_de_vie, bool estNé, int déplacement_max )
-    :   m_âge{}, 
-        m_espérance_de_vie{espérance_de_vie},
+epidemie::Individu::Individu( unsigned int graine_aleatoire, int esperance_de_vie, bool estNe, int deplacement_max )
+    :   m_age{}, 
+        m_esperance_de_vie{esperance_de_vie},
         m_position{},
-        m_moteur_stochastique{graine_aléatoire},
-        m_générateur_quantité_déplacement(1,déplacement_max),
-        m_générateur_déplacement(1,4),
-        m_générateur_maladie(0.,1.),
-        m_générateur_âge(1,espérance_de_vie)
+        m_moteur_stochastique{graine_aleatoire},
+        m_generateur_quantite_deplacement(1,deplacement_max),
+        m_generateur_deplacement(1,4),
+        m_generateur_maladie(0.,1.),
+        m_generateur_age(1,esperance_de_vie)
 {
-    if (estNé)
+    if (estNe)
     {
-        m_âge = 1;
+        m_age = 1;
     }
-    else m_âge = m_générateur_âge(m_moteur_stochastique);
+    else m_age = m_generateur_age(m_moteur_stochastique);
 
-    m_grippe.sensibilité = Sensibilité::Sensible;
-    m_agent_pathogène.sensibilité = Sensibilité::Sensible;
+    m_grippe.sensibilite = Sensibilite::Sensible;
+    m_agent_pathogene.sensibilite = Sensibilite::Sensible;
 }
 // --------------------------------------------------------------------------------------------------------------------
 void 
-épidémie::Individu::veillirDUnJour()
+epidemie::Individu::veillirDUnJour()
 {
     // Gestion de la grippe :
     if (m_grippe.temps_incubation > 0)
     {
-        m_grippe.sensibilité = Sensibilité::Contagieux;
+        m_grippe.sensibilite = Sensibilite::Contagieux;
         m_grippe.temps_incubation -= 1;
     }
     else if (m_grippe.temps_symptomatique > 0)
@@ -41,52 +41,52 @@ void
     {
         m_grippe.temps_contagieux -= 1;
     }
-    else if (m_grippe.sensibilité != Sensibilité::Sensible )
+    else if (m_grippe.sensibilite != Sensibilite::Sensible )
     {
-        m_grippe.sensibilité = Sensibilité::Immunisé;
+        m_grippe.sensibilite = Sensibilite::Immunise;
     }
 
-    // Gestion de l'agent pathogène :
-    if (m_agent_pathogène.temps_asymptomatique > 0)
+    // Gestion de l'agent pathogene :
+    if (m_agent_pathogene.temps_asymptomatique > 0)
     {
-        // Normalement, dans ce cas, l'individu est déjà contagieux
-        assert(m_agent_pathogène.sensibilité == Sensibilité::Contagieux);
-        m_agent_pathogène.temps_asymptomatique -= 1;
-        m_agent_pathogène.temps_contagieux     -= 1;
+        // Normalement, dans ce cas, l'individu est deja contagieux
+        assert(m_agent_pathogene.sensibilite == Sensibilite::Contagieux);
+        m_agent_pathogene.temps_asymptomatique -= 1;
+        m_agent_pathogene.temps_contagieux     -= 1;
         ;
     }
-    else if (m_agent_pathogène.temps_symptomatique > 0)
+    else if (m_agent_pathogene.temps_symptomatique > 0)
     {
-        m_agent_pathogène.sensibilité = Sensibilité::Infecté;
-        m_agent_pathogène.temps_symptomatique -= 1;
-        m_agent_pathogène.temps_contagieux    -= 1;
+        m_agent_pathogene.sensibilite = Sensibilite::Infecte;
+        m_agent_pathogene.temps_symptomatique -= 1;
+        m_agent_pathogene.temps_contagieux    -= 1;
     }
-    else if (m_agent_pathogène.temps_contagieux > 0)
+    else if (m_agent_pathogene.temps_contagieux > 0)
     {
-        m_agent_pathogène.sensibilité = Sensibilité::Contagieux;
-        m_agent_pathogène.temps_contagieux -= 1;
+        m_agent_pathogene.sensibilite = Sensibilite::Contagieux;
+        m_agent_pathogene.temps_contagieux -= 1;
     }
-    else if (m_agent_pathogène.temps_passé_immunisé > 0)
+    else if (m_agent_pathogene.temps_passe_immunise > 0)
     {
-        m_agent_pathogène.sensibilité = Sensibilité::Immunisé;
-        m_agent_pathogène.temps_passé_immunisé -= 1;
+        m_agent_pathogene.sensibilite = Sensibilite::Immunise;
+        m_agent_pathogene.temps_passe_immunise -= 1;
     }
     else 
     {
-        m_agent_pathogène.sensibilité = Sensibilité::Sensible;
+        m_agent_pathogene.sensibilite = Sensibilite::Sensible;
     }
-    m_âge += 1;
+    m_age += 1;
 }
 // --------------------------------------------------------------------------------------------------------------------
-void épidémie::Individu::seDéplace( Grille& grille )
+void epidemie::Individu::seDeplace( Grille& grille )
 {
     enum Direction {
         Ouest = 1, Est = 2, Nord = 3, Sud = 4
     };
-    int nbre_déplacement = m_générateur_quantité_déplacement(m_moteur_stochastique);
-    for ( int i = 0; i < nbre_déplacement; ++i )
+    int nbre_deplacement = m_generateur_quantite_deplacement(m_moteur_stochastique);
+    for ( int i = 0; i < nbre_deplacement; ++i )
     {
-        int direction = m_générateur_déplacement(m_moteur_stochastique);
+        int direction = m_generateur_deplacement(m_moteur_stochastique);
         switch(direction)
         {
             case Ouest:
@@ -111,9 +111,9 @@ void épidémie::Individu::seDéplace( Grille& grille )
 }
 // --------------------------------------------------------------------------------------------------------------------
 void 
-épidémie::Individu::estContaminé( Grippe& grippe )
+epidemie::Individu::estContamine( Grippe& grippe )
 {
-    if (m_grippe.sensibilité == Sensibilité::Sensible)
+    if (m_grippe.sensibilite == Sensibilite::Sensible)
     {
         m_grippe.temps_incubation = grippe.nombreJoursIncubation();
         m_grippe.temps_symptomatique = grippe.nombreJoursSymptomatique();
@@ -121,46 +121,46 @@ void
 }
 // --------------------------------------------------------------------------------------------------------------------
 void 
-épidémie::Individu::estContaminé( AgentPathogène& agent )
+epidemie::Individu::estContamine( AgentPathogene& agent )
 {
-    if (m_agent_pathogène.sensibilité == Sensibilité::Sensible )
+    if (m_agent_pathogene.sensibilite == Sensibilite::Sensible )
     {
-        m_agent_pathogène.temps_asymptomatique = agent.nombreJoursAsymptomatique();
-        m_agent_pathogène.temps_symptomatique  = agent.nombreJoursSymptomatique();
-        m_agent_pathogène.temps_passé_immunisé = agent.nombre_jours_immunité;
-        m_agent_pathogène.temps_contagieux     = m_agent_pathogène.temps_asymptomatique+m_agent_pathogène.temps_symptomatique +
-                                                 agent.période_contagieux.second;
-        m_agent_pathogène.sensibilité          = Sensibilité::Contagieux;
+        m_agent_pathogene.temps_asymptomatique = agent.nombreJoursAsymptomatique();
+        m_agent_pathogene.temps_symptomatique  = agent.nombreJoursSymptomatique();
+        m_agent_pathogene.temps_passe_immunise = agent.nombre_jours_immunite;
+        m_agent_pathogene.temps_contagieux     = m_agent_pathogene.temps_asymptomatique+m_agent_pathogene.temps_symptomatique +
+                                                 agent.periode_contagieux.second;
+        m_agent_pathogene.sensibilite          = Sensibilite::Contagieux;
     }
 }
 // --------------------------------------------------------------------------------------------------------------------
 bool 
-épidémie::Individu::testContaminationGrippe( Grille const& grille, Interactions const& t_interactions, 
-                                             Grippe& grippe, AgentPathogène& agent)
+epidemie::Individu::testContaminationGrippe( Grille const& grille, Interactions const& t_interactions, 
+                                             Grippe& grippe, AgentPathogene& agent)
 {
     auto [largeur, hauteur] = grille.dimension();
     Grille::StatistiqueParCase const& statistiques = grille.getStatistiques()[m_position.x + m_position.y*largeur];
 
 
-    // Test infection par la grippe avec interaction avec l'agent pathogène 
+    // Test infection par la grippe avec interaction avec l'agent pathogene 
     // Autant de chance de l'attraper que d'individu ayant le virus de la grippe :
-    // On traite d'abord les contaminants ayant le virus mais pas l'agent pathogène :
-    double probabilité_attraper_grippe = t_interactions.tauxTransmissionGrippe(grippe.tauxTransmission(), false,
-                                                                               this->m_agent_pathogène.sensibilité == Sensibilité::Infecté,
-                                                                               this->m_agent_pathogène.sensibilité == Sensibilité::Immunisé);
-    for ( int i = 0; i < statistiques.nombre_contaminant_seulement_grippé; ++i )
+    // On traite d'abord les contaminants ayant le virus mais pas l'agent pathogene :
+    double probabilite_attraper_grippe = t_interactions.tauxTransmissionGrippe(grippe.tauxTransmission(), false,
+                                                                               this->m_agent_pathogene.sensibilite == Sensibilite::Infecte,
+                                                                               this->m_agent_pathogene.sensibilite == Sensibilite::Immunise);
+    for ( int i = 0; i < statistiques.nombre_contaminant_seulement_grippe; ++i )
     {
-        if (m_générateur_maladie(m_moteur_stochastique) < probabilité_attraper_grippe)
+        if (m_generateur_maladie(m_moteur_stochastique) < probabilite_attraper_grippe)
         {
             return true;
         }
     }
-    probabilité_attraper_grippe = t_interactions.tauxTransmissionGrippe(grippe.tauxTransmission(), true,
-                                                                        this->m_agent_pathogène.sensibilité == Sensibilité::Infecté,
-                                                                        this->m_agent_pathogène.sensibilité == Sensibilité::Immunisé);
-    for ( int i = 0; i < statistiques.nombre_contaminant_grippé_et_contaminé_par_agent; ++i )
+    probabilite_attraper_grippe = t_interactions.tauxTransmissionGrippe(grippe.tauxTransmission(), true,
+                                                                        this->m_agent_pathogene.sensibilite == Sensibilite::Infecte,
+                                                                        this->m_agent_pathogene.sensibilite == Sensibilite::Immunise);
+    for ( int i = 0; i < statistiques.nombre_contaminant_grippe_et_contamine_par_agent; ++i )
     {
-        if (m_générateur_maladie(m_moteur_stochastique) < probabilité_attraper_grippe)
+        if (m_generateur_maladie(m_moteur_stochastique) < probabilite_attraper_grippe)
         {
             return true;
         }
@@ -169,23 +169,23 @@ bool
 }
 //
 bool 
-épidémie::Individu::testContaminationAgent( Grille const& grille, AgentPathogène& agent)
+epidemie::Individu::testContaminationAgent( Grille const& grille, AgentPathogene& agent)
 {
-    if (this->m_agent_pathogène.temps_contagieux > 0) return false;
+    if (this->m_agent_pathogene.temps_contagieux > 0) return false;
     auto [largeur, hauteur] = grille.dimension();
     Grille::StatistiqueParCase const& statistiques = grille.getStatistiques()[m_position.x + m_position.y*largeur];
 
-    for ( int i = 0; i < statistiques.nombre_contaminant_seulement_contaminé_par_agent; ++i )
+    for ( int i = 0; i < statistiques.nombre_contaminant_seulement_contamine_par_agent; ++i )
     {
-        double jet = m_générateur_maladie(m_moteur_stochastique);
+        double jet = m_generateur_maladie(m_moteur_stochastique);
         if (jet < agent.taux_infection)
         {
             return true;
         }
     }
-    for ( int i = 0; i < statistiques.nombre_contaminant_grippé_et_contaminé_par_agent; ++i )
+    for ( int i = 0; i < statistiques.nombre_contaminant_grippe_et_contamine_par_agent; ++i )
     {
-        double jet = m_générateur_maladie(m_moteur_stochastique);
+        double jet = m_generateur_maladie(m_moteur_stochastique);
         if (jet < agent.taux_infection)
         {
             return true;
@@ -195,8 +195,8 @@ bool
 }
 //
 void
-épidémie::Individu::setPosition(int largeur, int hauteur)
+epidemie::Individu::setPosition(int largeur, int hauteur)
 {
-    m_position.x = int(m_générateur_maladie(m_moteur_stochastique)*largeur);
-    m_position.y = int(m_générateur_maladie(m_moteur_stochastique)*hauteur);
+    m_position.x = int(m_generateur_maladie(m_moteur_stochastique)*largeur);
+    m_position.y = int(m_generateur_maladie(m_moteur_stochastique)*hauteur);
 }

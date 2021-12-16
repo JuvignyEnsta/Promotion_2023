@@ -7,7 +7,7 @@ void creer_fenetre()
     // Pour choisir une fonte courante pour afficher du texte (pas encore mis en oeuvre pour l'affichage du texte)
     sdl2::font fonte_texte("./data/Lato-Thin.ttf", 18);
 
-    // Créer une fenêtre avec un titre et la résolution de la fenêtre (ici 800 x 600 pixels )
+    // Creer une fenêtre avec un titre et la resolution de la fenêtre (ici 800 x 600 pixels )
     sdl2::window fenêtre("Nuclear Alert : Console principale", {800, 600});
 
     // Charge une image jpg (on peut aussi charger une image au format png)
@@ -18,15 +18,15 @@ void creer_fenetre()
     homer.rotate({64,64}, 45);
     homer.color_filter({0xFF,0xF0,0xA0,0xFF});
 
-    sdl2::texte titre ("Console d'application élaborée", fonte_titre, fenêtre, {0x00,0xFF,0xFF,0xFF});
+    sdl2::texte titre ("Console d'application elaboree", fonte_titre, fenêtre, {0x00,0xFF,0xFF,0xFF});
     titre.at(10,310);
     auto [wph, hph] = titre.dimension();
     titre.rotate({wph/2,hph/2}, 30);
 
-    sdl2::texte phrase("Taux de bore détecté : 30%", fonte_texte, fenêtre, {0xFF,0xFF,0xFF,0xFF});
+    sdl2::texte phrase("Taux de bore detecte : 30%", fonte_texte, fenêtre, {0xFF,0xFF,0xFF,0xFF});
     phrase.at(10,360);
 
-    sdl2::texte doc("Ceci est de la documentation très poussée. On peut faire des sauts de ligne, etc.\n"
+    sdl2::texte doc("Ceci est de la documentation tres poussee. On peut faire des sauts de ligne, etc.\n"
                     "Comme on peut le voir ici !", fonte_texte, fenêtre, 320, 200, {0xFF,0xFF,0x00,0xFF},
                     {0x00,0x00,0xFF,0xFF});
     doc.at(400, 360);
@@ -43,11 +43,11 @@ void creer_fenetre()
         // On utilise des flux pour afficher le graphisme
         // Affichage d'un rectangle plein avec coin
         // 0 - 9 A = 10, B = 11, C= 12, D = 13, E = 14, F = 15 en base 16
-        // 0x  => Ecriture hexadécimale (en base 16) 0x3E = 3*16 + 14 = 62 en décimal
-        // 0b  => Ecriture binaire 0b100010 => écriture binaire = 2^{1} + 2^{5} = 33 en décimal
+        // 0x  => Ecriture hexadecimale (en base 16) 0x3E = 3*16 + 14 = 62 en decimal
+        // 0b  => Ecriture binaire 0b100010 => ecriture binaire = 2^{1} + 2^{5} = 33 en decimal
         // 
-        // Donc 0xAB = 10*16 + 11 = 171 en décimal
-        //      0xFF = 15*16 + 15 = 255 en décimal
+        // Donc 0xAB = 10*16 + 11 = 171 en decimal
+        //      0xFF = 15*16 + 15 = 255 en decimal
         fenêtre << sdl2::rectangle({100,100}, {100,50}, {0,0xFF,0xFF,0xFF}, true);
         // Affichage d'un segment de droite
         fenêtre << sdl2::line({10,10}, {50,30}, {0xFF,0x00,0x00,0xFF});

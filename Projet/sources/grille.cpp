@@ -1,6 +1,6 @@
 #include "grille.hpp"
 
-épidémie::Grille::Grille( std::size_t population )
+epidemie::Grille::Grille( std::size_t population )
 {
     int taille = int(sqrt(population));
     m_dim_x = (population+taille-1)/taille;
@@ -9,25 +9,25 @@
 }
 //
 std::size_t 
-épidémie::Grille::nombreTotalContaminésGrippe() const
+epidemie::Grille::nombreTotalContaminesGrippe() const
 {
     std::size_t total = 0;
     for (auto statistique : m_statistiques)
     {
-        total += statistique.nombre_contaminant_grippé_et_contaminé_par_agent;
-        total += statistique.nombre_contaminant_seulement_grippé;
+        total += statistique.nombre_contaminant_grippe_et_contamine_par_agent;
+        total += statistique.nombre_contaminant_seulement_grippe;
     }
     return total;
 }
 //
 std::size_t 
-épidémie::Grille::nombreTotalContaminésAgentPathogène() const
+epidemie::Grille::nombreTotalContaminesAgentPathogene() const
 {
     std::size_t total = 0;
     for (auto statistique : m_statistiques )
     {
-        total += statistique.nombre_contaminant_seulement_contaminé_par_agent;
-        total += statistique.nombre_contaminant_grippé_et_contaminé_par_agent;
+        total += statistique.nombre_contaminant_seulement_contamine_par_agent;
+        total += statistique.nombre_contaminant_grippe_et_contamine_par_agent;
     }
     return total;
 }

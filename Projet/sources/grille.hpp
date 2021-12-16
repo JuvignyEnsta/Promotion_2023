@@ -4,27 +4,27 @@
 #include <array>
 #include "contexte.hpp"
 
-namespace épidémie 
+namespace epidemie 
 {
 class Grille 
 {
 public:
     struct StatistiqueParCase
     {
-        int nombre_contaminant_seulement_grippé;
-        int nombre_contaminant_seulement_contaminé_par_agent;
-        int nombre_contaminant_grippé_et_contaminé_par_agent;
+        int nombre_contaminant_seulement_grippe;
+        int nombre_contaminant_seulement_contamine_par_agent;
+        int nombre_contaminant_grippe_et_contamine_par_agent;
     };
-    // Taille de la grille dépend de la taille de la population
+    // Taille de la grille depend de la taille de la population
     Grille( std::size_t population );
 
     std::vector<StatistiqueParCase>& getStatistiques() { return m_statistiques; }
 
     std::vector<StatistiqueParCase> const& getStatistiques() const { return m_statistiques; }
 
-    std::size_t nombreTotalContaminésGrippe() const;
+    std::size_t nombreTotalContaminesGrippe() const;
 
-    std::size_t nombreTotalContaminésAgentPathogène() const;
+    std::size_t nombreTotalContaminesAgentPathogene() const;
 
     std::array<int,2> dimension() const 
     {

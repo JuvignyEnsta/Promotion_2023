@@ -22,7 +22,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win, cons
     this->pt_texture = SDL_CreateTextureFromSurface( win.get_native_renderer(), textSurface );
     if (this->pt_texture == nullptr)
     {
-        std::string errMsg = "Incapable de créer une texture du texte rendu : " +
+        std::string errMsg = "Incapable de creer une texture du texte rendu : " +
                              std::string(SDL_GetError());
         throw std::runtime_error(errMsg);
     }
@@ -53,7 +53,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win,
                    std::int32_t justification, int marge_width, int marge_height)
     : image()
 {
-    // Première étape, compter le nombre de lignes imposées (par des \n) et leur emplacement
+    // Premiere etape, compter le nombre de lignes imposees (par des \n) et leur emplacement
     std::vector<int> positions_retour_chariot; positions_retour_chariot.reserve(1024);
 #if __cplusplus <= 201703L
     {
@@ -71,19 +71,19 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win,
     }
 #endif
     std::vector<std::string> lignes;
-    std::size_t début = 0, fin = (positions_retour_chariot.size()>0 ? positions_retour_chariot[0] : phrase.size());
+    std::size_t debut = 0, fin = (positions_retour_chariot.size()>0 ? positions_retour_chariot[0] : phrase.size());
     std::size_t index = 0;
     std::vector<int> pos_vert;
     pos_vert.push_back(0);
-    while ( (début < phrase.size()) && (pos_vert.back() < maxheight-marge_height) )
+    while ( (debut < phrase.size()) && (pos_vert.back() < maxheight-marge_height) )
     {
-        std::string paragraph(phrase.begin()+début, phrase.begin()+fin);
+        std::string paragraph(phrase.begin()+debut, phrase.begin()+fin);
 
         int wt, ht;
         TTF_SizeText(fnt.m_pt_ttf, paragraph.c_str(), &wt, &ht);
         if (wt < maxwidth - 2*marge_width)
         {
-            // Cas où on peut afficher le paragraph sur une seule ligne :
+            // Cas ou on peut afficher le paragraph sur une seule ligne :
             lignes.emplace_back(std::move(paragraph));
         }
         else
@@ -112,7 +112,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win,
             lignes.emplace_back(ligne);
             pos_vert.push_back(pos_vert.back() + ht+3);
         }
-        début = fin+1;
+        debut = fin+1;
         index += 1;
         fin = (positions_retour_chariot.size()>index ? positions_retour_chariot[index] : phrase.size());
     }
@@ -150,7 +150,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win,
     this->pt_texture = SDL_CreateTextureFromSurface( win.get_native_renderer(), panneau );
     if (this->pt_texture == nullptr)
     {
-        std::string errMsg = "Incapable de créer une texture du texte rendu : " +
+        std::string errMsg = "Incapable de creer une texture du texte rendu : " +
                              std::string(SDL_GetError());
         throw std::runtime_error(errMsg);
     }
@@ -169,7 +169,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win, int 
 {
     //std::cout << __PRETTY_FUNCTION__ << " : " << phrase << std::endl;
     int maxheight = win.dimensions()[1] - marge_height;
-    // Première étape, compter le nombre de lignes imposées (par des \n) et leur emplacement
+    // Premiere etape, compter le nombre de lignes imposees (par des \n) et leur emplacement
     std::vector<int> positions_retour_chariot; positions_retour_chariot.reserve(1024);
 #if __cplusplus <= 201703L
     {
@@ -187,20 +187,20 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win, int 
     }
 #endif
     std::vector<std::string> lignes;
-    std::size_t début = 0, fin = (positions_retour_chariot.size()>0 ? positions_retour_chariot[0] : 
+    std::size_t debut = 0, fin = (positions_retour_chariot.size()>0 ? positions_retour_chariot[0] : 
                                                                       phrase.size());
     std::size_t index = 0;
     std::vector<int> pos_vert;
     pos_vert.push_back(0);
-    while ( (début < phrase.size()) && (pos_vert.back() < maxheight) )
+    while ( (debut < phrase.size()) && (pos_vert.back() < maxheight) )
     {
-        std::string paragraph(phrase.begin()+début, phrase.begin()+fin);
+        std::string paragraph(phrase.begin()+debut, phrase.begin()+fin);
 
         int wt, ht;
         TTF_SizeText(fnt.m_pt_ttf, paragraph.c_str(), &wt, &ht);
         if (wt < maxwidth - 2*marge_width)
         {
-            // Cas où on peut afficher le paragraphe sur une seule ligne :
+            // Cas ou on peut afficher le paragraphe sur une seule ligne :
             lignes.emplace_back(std::move(paragraph));
             pos_vert.push_back(pos_vert.back()+ht+2);
         }
@@ -230,7 +230,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win, int 
             lignes.emplace_back(ligne);
             pos_vert.push_back(pos_vert.back() + ht+3);
         }
-        début = fin+1;
+        debut = fin+1;
         index += 1;
         fin = (positions_retour_chariot.size()>index ? positions_retour_chariot[index] : phrase.size());
     }
@@ -284,7 +284,7 @@ sdl2::texte::texte(const std::string& phrase, const font& fnt, window& win, int 
     this->pt_texture = SDL_CreateTextureFromSurface( win.get_native_renderer(), panneau );
     if (this->pt_texture == nullptr)
     {
-        std::string errMsg = "Incapable de créer une texture du texte rendu : " +
+        std::string errMsg = "Incapable de creer une texture du texte rendu : " +
                              std::string(SDL_GetError());
         throw std::runtime_error(errMsg);
     }
