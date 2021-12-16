@@ -1,3 +1,3 @@
 CC = gcc
-CXX = g++-10
+CXX = g++
 LIB =
