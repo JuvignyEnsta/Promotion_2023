@@ -8,6 +8,11 @@ Et si besoin modifier Makefile et Make_linux.inc pour utiliser g++-10.
 
 # Compiler mpi avec g++-10
 
+Le plus simple : 
+
+    export OMPI_CXX=g++-10
+
+
 Ajouter les CFLAGS et LDFLAGS dans le Make_linux.inc
 
     CXXFLAGS+=$(mpic++ --showme:compile)
