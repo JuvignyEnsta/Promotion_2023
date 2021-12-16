@@ -9,6 +9,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include <array>
 
 namespace sdl2
 {
